@@ -1,0 +1,38 @@
+ISTRUZIONI GITHUB ACTIONS - Foto Ricordo Studio
+================================================
+
+1) Vai su:
+   https://github.com
+
+2) Accedi o crea un account gratuito.
+
+3) Crea un nuovo repository:
+   - clicca su New
+   - Repository name: FotoRicordoStudio
+   - scegli Public
+   - clicca Create repository
+
+4) Carica i file:
+   - estrai questo ZIP sul desktop
+   - su GitHub clicca Add file -> Upload files
+   - trascina TUTTI i file e le cartelle estratte
+   - IMPORTANTISSIMO: deve esserci anche la cartella .github
+   - clicca Commit changes
+
+5) Compila online:
+   - vai nella scheda Actions
+   - clicca Build Windows EXE
+   - clicca Run workflow
+   - conferma con il pulsante verde Run workflow
+
+6) Scarica l'EXE:
+   - aspetta che il processo diventi verde
+   - clicca sulla build completata
+   - in basso trovi Artifacts
+   - scarica FotoRicordoStudio-Windows
+   - estrai lo ZIP scaricato
+
+NOTA
+----
+Non spostare solo l'EXE fuori dalla cartella.
+Crea un collegamento sul desktop all'EXE.
