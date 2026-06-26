@@ -1,0 +1,53 @@
+name: Build Windows EXE
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Scarica repository
+        uses: actions/checkout@v4
+
+      - name: Installa Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Installa librerie
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Crea EXE Windows
+        shell: cmd
+        run: |
+          cd src
+          pyinstaller --onedir --windowed --clean --noupx ^
+            --name "Foto Ricordo Studio by Avanin" ^
+            --icon "..\assets\FotoRicordoStudio.ico" ^
+            --add-data "..\assets\FotoRicordoStudio.ico;assets" ^
+            --add-data "..\assets\logo_av.png;assets" ^
+            --exclude-module matplotlib ^
+            --exclude-module numpy ^
+            --exclude-module pandas ^
+            --exclude-module scipy ^
+            --exclude-module PyQt5 ^
+            --exclude-module PySide6 ^
+            FotoRicordoStudio.py
+
+      - name: Prepara ZIP finale
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path release
+          Compress-Archive -Path "src\dist\Foto Ricordo Studio by Avanin\*" -DestinationPath "release\FotoRicordoStudio-Windows.zip" -Force
+
+      - name: Carica programma compilato
+        uses: actions/upload-artifact@v4
+        with:
+          name: FotoRicordoStudio-Windows
+          path: release/FotoRicordoStudio-Windows.zip
